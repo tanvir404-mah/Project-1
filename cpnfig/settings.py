@@ -92,11 +92,12 @@ pymysql.install_as_MySQLdb()
 
 DATABASES = {
     'default': {
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'cst_management',                     # Render database name
         'USER': 'cst_management_user',                # Render username
         'PASSWORD': 'eoG4kfMTyszf86Csf49xAk7UV4gIeI9k', # Render password
         'HOST': 'dpg-d3hpl1nfte5s73d513s0-a.mysql.render.com',  # Render host
-        'PORT': '3306',                               # MySQL port
+        'PORT': '5432',                               # PostgreSQL port
     }
 }
 
