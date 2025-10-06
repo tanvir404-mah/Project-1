@@ -1,7 +1,7 @@
 services:
   - type: web
-    name: cpnfig                  # Blueprint Name / Service Name
+    name: cpnfig               
     env: python
-    pythonVersion: 3.10           # Python version
+    pythonVersion: 3.10          
     buildCommand: pip install --upgrade pip && pip install -r requirements.txt && python manage.py migrate && python manage.py collectstatic --noinput
     startCommand: gunicorn cpnfig.wsgi
