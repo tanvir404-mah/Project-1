@@ -84,16 +84,23 @@ WSGI_APPLICATION = 'cpnfig.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+# Database
+# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
+
+import pymysql
+pymysql.install_as_MySQLdb()
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'cst-management',       #  ডাটাবেজের নাম
-        'USER': 'root',                 # MySQL ইউজারনেম 
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'NAME': 'cst_management',                     # Render database name
+        'USER': 'cst_management_user',                # Render username
+        'PASSWORD': 'eoG4kfMTyszf86Csf49xAk7UV4gIeI9k', # Render password
+        'HOST': 'dpg-d3hpl1nfte5s73d513s0-a.mysql.render.com',  # Render host
+        'PORT': '3306',                               # MySQL port
     }
 }
+
 
 
 
