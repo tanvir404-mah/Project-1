@@ -92,7 +92,6 @@ pymysql.install_as_MySQLdb()
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'cst_management',                     # Render database name
         'USER': 'cst_management_user',                # Render username
         'PASSWORD': 'eoG4kfMTyszf86Csf49xAk7UV4gIeI9k', # Render password
