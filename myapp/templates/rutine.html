@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Routine</title>
+</head>
+<body>
+    <h1>Your Routine</h1>
+    <p>This is the routine page where you can view your daily schedule.</p>
+
+<h2>Routine: {{ routine.semester }} - Shift {{ routine.shift }} - Group {{ routine.group }}</h2>
+
+<table border="1" cellpadding="10" cellspacing="0">
+  <tr>
+    <th>Day</th>
+    <th>1:30 – 2:15</th>
+    <th>2:15 – 3:00</th>
+    <th>3:00 – 3:45</th>
+    <th>3:45 – 4:30</th>
+    <th>5:15 – 6:00</th>
+    <th>6:00 – 6:45</th>
+    <th>Extra</th>
+  </tr>
+
+  {% for row in routine.rows.all %}
+    <tr>
+      <td>{{ row.day }}</td>
+      {% for period in "1234567" %}
+        <td>
+          {% for cell in row.cells.all %}
+            {% if cell.period == period|add:""|int %}
+              <strong>{{ cell.subject_code }}</strong><br>
+              {{ cell.subject_name }}<br>
+              {{ cell.teacher_short }}<br>
+              {{ cell.room }}
+            {% endif %}
+          {% endfor %}
+        </td>
+      {% endfor %}
+    </tr>
+  {% endfor %}
+</table>
+
+
+
+</body>
+</html>

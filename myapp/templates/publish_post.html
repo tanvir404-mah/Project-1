@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Publish Post</title>
+</head>
+<body>
+    <h2>Publish New Post</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <label>Title:</label><br>
+        <input type="text" name="title" required><br><br>
+
+        <label>Content:</label><br>
+        <textarea name="content" rows="4" required></textarea><br><br>
+
+        <label>Category:</label><br>
+        <select name="category">
+            <option value="notice">Notice</option>
+            <option value="assignment">Assignment</option>
+            <option value="exam">Exam Info</option>
+            <option value="message">Message</option>
+            <option value="other">Other</option>
+        </select><br><br>
+
+        <button type="submit">Publish</button>
+    </form>
+</body>
+</html>

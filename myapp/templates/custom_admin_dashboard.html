@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Principal Dashboard</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            background: #f7f9fc;
+        }
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background: #2c3e50;
+            color: white;
+            height: 100vh;
+            padding-top: 20px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar h2 {
+            text-align: center;
+            margin: 0 0 20px 0;
+            font-size: 22px;
+        }
+        .sidebar a {
+            padding: 12px 20px;
+            text-decoration: none;
+            color: white;
+            display: block;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .sidebar a:hover {
+            background: #3498db;
+        }
+        /* Content */
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+            flex: 1;
+        }
+        header {
+            background: #3498db;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-radius: 8px;
+        }
+        .section {
+            display: none; /* সব section default এ hidden */
+            margin-top: 20px;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 6px;
+        }
+        .btn:hover {
+            background: #2980b9;
+        }
+        input, textarea {
+            display: block;
+            margin: 8px 0;
+            padding: 8px;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>📊 Principal</h2>
+        <a onclick="showSection('dashboard')">🏠 Dashboard</a>
+        <a onclick="showSection('students')">👨‍🎓 Students</a>
+        <a onclick="showSection('teachers')">👨‍🏫 Teachers</a>
+        <a onclick="showSection('notices')">📢 Notices</a>
+        <a onclick="showSection('attendance')">📅 Attendance</a>
+        <a onclick="showSection('results')">🏆 Results</a>
+        <a onclick="showSection('reports')">📑 Reports</a>
+        <a onclick="showSection('logout')">🚪 Logout</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <header>
+            <h1>Principal Dashboard</h1>
+        </header>
+
+        <!-- Default Dashboard Section -->
+        <div id="dashboard" class="section card" style="display:block;">
+            <h2>Welcome, Principal!</h2>
+            <p>Manage Students, Teachers, Notices, Attendance, Results & Reports all from one place.</p>
+        </div>
+
+        <!-- Students Section -->
+        <div id="students" class="section card">
+            <h2>Students</h2>
+            <button class="btn" onclick="showForm('studentForm')">➕ Add Student</button>
+            <button class="btn" onclick="loadStudents()">📄 View List</button>
+
+            <div id="studentForm" style="display:none; margin-top:15px;">
+                <form id="addStudentForm">
+                    <input type="text" name="first_name" placeholder="First Name" required>
+                    <input type="text" name="last_name" placeholder="Last Name" required>
+                    <input type="text" name="roll_number" placeholder="Roll Number" required>
+                    <button type="submit" class="btn">Save</button>
+                </form>
+            </div>
+            <ul id="studentList"></ul>
+        </div>
+
+        <!-- Teachers Section -->
+        <div id="teachers" class="section card">
+            <h2>Teachers</h2>
+            <button class="btn" onclick="showForm('teacherForm')">➕ Add Teacher</button>
+            <button class="btn" onclick="loadTeachers()">📄 View List</button>
+
+            <div id="teacherForm" style="display:none; margin-top:15px;">
+                <form id="addTeacherForm">
+                    <input type="text" name="first_name" placeholder="First Name" required>
+                    <input type="text" name="last_name" placeholder="Last Name" required>
+                    <input type="text" name="department" placeholder="Department" required>
+                    <button type="submit" class="btn">Save</button>
+                </form>
+            </div>
+            <ul id="teacherList"></ul>
+        </div>
+
+        <!-- Notices Section -->
+        <div id="notices" class="section card">
+            <h2>Notices</h2>
+            <button class="btn" onclick="showForm('noticeForm')">➕ Add Notice</button>
+            <button class="btn" onclick="loadNotices()">📄 View Notices</button>
+
+            <div id="noticeForm" style="display:none; margin-top:15px;">
+                <form id="addNoticeForm">
+                    <input type="text" name="title" placeholder="Notice Title" required>
+                    <textarea name="content" placeholder="Notice Content" required></textarea>
+                    <button type="submit" class="btn">Save</button>
+                </form>
+            </div>
+            <ul id="noticeList"></ul>
+        </div>
+
+        <!-- Attendance Section -->
+        <div id="attendance" class="section card">
+            <h2>Attendance</h2>
+            <button class="btn" onclick="showForm('attendanceForm')">➕ Add Record</button>
+            <button class="btn" onclick="loadAttendance()">📄 View Records</button>
+
+            <div id="attendanceForm" style="display:none; margin-top:15px;">
+                <form id="addAttendanceForm">
+                    <input type="text" name="student" placeholder="Student Name" required>
+                    <input type="text" name="subject" placeholder="Subject" required>
+                    <input type="date" name="date" required>
+                    <select name="status" required>
+                        <option value="Present">Present</option>
+                        <option value="Absent">Absent</option>
+                    </select>
+                    <button type="submit" class="btn">Save</button>
+                </form>
+            </div>
+            <ul id="attendanceList"></ul>
+        </div>
+
+        <!-- Results Section -->
+        <div id="results" class="section card">
+            <h2>Results</h2>
+            <button class="btn" onclick="showForm('resultForm')">➕ Add Result</button>
+            <button class="btn" onclick="loadResults()" class="Icons" fa><i class="fas fa-file-results"></i> View Results</button>
+
+            <div id="resultForm" style="display:none; margin-top:15px;">
+                <form id="addResultForm">
+                    <input type="text" name="student" placeholder="Student Name" required>
+                    <input type="text" name="subject" placeholder="Subject" required>
+                    <input type="number" name="marks" placeholder="Marks" required>
+                    <input type="number" name="total_marks" placeholder="Total Marks" required>
+                    <button type="submit" class="btn">Save</button>
+                </form>
+            </div>
+            <ul id="resultList"></ul>
+        </div>
+
+        <!-- Reports Section -->
+        <div id="reports" class="section card">
+            <h2>Reports</h2>
+            <p>📑 View consolidated reports of Students, Attendance, and Results here.</p>
+            <button class="btn" onclick="loadReports()">📊 Generate Reports</button>
+            <div id="reportContent"></div>
+        </div>
+
+        <div id="logout" class="section card">
+            <h2>Logout</h2>
+            <form method="POST" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn">Logout</button>
+            </form>
+        </div>
+
+    <script>
+        
+    function loadNotices(){
+        fetch("/get-notices/")
+        .then(res => res.json())
+        .then(data => {
+            let list = document.getElementById("noticeList");
+            list.innerHTML = "";
+            data.forEach(n => {
+                list.innerHTML += `<li><b>${n.title}</b> by ${n.by}<br>${n.content}</li>`;
+            });
+        });
+    }
+
+
+        // Sidebar section switch
+        function showSection(id){
+            document.querySelectorAll(".section").forEach(sec => sec.style.display = "none");
+            document.getElementById(id).style.display = "block";
+        }
+        function showForm(id){
+            document.getElementById(id).style.display = "block";
+        }
+
+        // ================= AJAX CALLS =================
+        // Example Students
+        document.getElementById("addStudentForm").addEventListener("submit", function(e){
+            e.preventDefault();
+            let formData = new FormData(this);
+            fetch("/add-student/", {method:"POST", headers:{"X-CSRFToken":"{{ csrf_token }}"}, body:formData})
+            .then(res=>res.json()).then(data=>{
+                alert(data.message);
+                this.reset();
+                loadStudents();
+            });
+        });
+        function loadStudents(){
+            fetch("/get-students/").then(res=>res.json()).then(data=>{
+                let list=document.getElementById("studentList"); list.innerHTML="";
+                data.forEach(st=>{ list.innerHTML += `<li>${st.first_name} ${st.last_name} - Roll: ${st.roll_number}</li>`; });
+            });
+        }
+
+    </script>
+</body>
+</html>

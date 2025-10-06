@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f9;
+      margin: 0;
+      padding: 0;
+    }
+    .contact-container {
+      width: 100%;
+      max-width: 600px;
+      margin: 50px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .contact-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      color: #444;
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      outline: none;
+      font-size: 14px;
+    }
+    .form-group textarea {
+      resize: none;
+      height: 120px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      background: #3618d0ff;
+      color: white;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #3618d0ff;
+    }
+    .contact-info {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 14px;
+      color: #555;
+    }
+    footer {
+      text-align: center;
+      background: #003366;
+      color: white;
+      padding: 15px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <div class="contact-container">
+    <h2>Contact Us</h2>
+    <form action="#" method="post">
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+      </div>
+      <div class="form-group">
+        <label for="message">Your Message</label>
+        <textarea id="message" name="message" placeholder="Write your message..." required></textarea>
+      </div>
+      <button type="submit">Send Message</button>
+    </form>
+    <div class="contact-info">
+      <p>📍 Address: Baitul Aman, A.F. Mujibur Rahman (ICS) Sarani, Faridpur 7803</p>
+      <p>📞 Phone: 01720177877 </p>
+      <p>✉ Email: rashed.dte@gmail.com.</p>
+    </div>
+  </div>
+  <footer>
+    <p> © All copyright reserved Computer Science And Technology Department</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Classrooms</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    .sidebar {
+      width: 220px;
+      height: 100vh;
+      background-color: #2c3e50;
+      color: white;
+      position: fixed;
+      top: 0;
+      left: 0;
+      padding-top: 20px;
+      overflow-y: auto;
+    }
+
+    .sidebar h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .sidebar a {
+      display: block;
+      color: white;
+      padding: 15px 20px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .sidebar a:hover {
+      background-color: #34495e;
+    }
+
+    .content {
+      margin-left: 220px;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    .classroom-list {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .classroom-list li {
+      background-color: white;
+      margin-bottom: 10px;
+      padding: 15px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .details-box {
+      background-color: #ffffff;
+      padding: 20px;
+      margin-top: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      display: none;
+    }
+
+    .details-box h2 {
+      margin-top: 0;
+      color: #2c3e50;
+    }
+
+    .details-box p {
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <h2>Classrooms</h2>
+    <a onclick="showDetails('COM-101')">COM-101</a>
+    <a onclick="showDetails('COM-102')">COM-102</a>
+    <a onclick="showDetails('COM-103')">COM-103</a>
+    <a onclick="showDetails('COM-301')">COM-301</a>
+    <a onclick="showDetails('COM-302')">COM-302</a>
+    <a onclick="showDetails('COM-303')">COM-303</a>
+    <a onclick="showDetails('COM-304')">COM-304</a>
+    <a onclick="showDetails('COM-305')">COM-305</a>
+    <a onclick="showDetails('COM-401')">COM-401</a>
+    <a onclick="showDetails('COM-402')">COM-402</a>
+    <a onclick="showDetails('COM-403')">COM-403</a>
+    <a onclick="showDetails('COM-404')">COM-404</a>
+    <a onclick="showDetails('COM-405')">COM-405</a>
+  </div>
+
+  <div class="content">
+    <h1>Available Classrooms</h1>
+    <ul class="classroom-list">
+      <li>COM-101</li>
+      <li>COM-102</li>
+      <li>COM-103</li>
+      <li>COM-301</li>
+      <li>COM-302</li>
+      <li>COM-303</li>
+      <li>COM-304</li>
+      <li>COM-305</li>
+      <li>COM-401</li>
+      <li>COM-402</li>
+      <li>COM-403</li>
+      <li>COM-404</li>
+      <li>COM-405</li>
+    </ul>
+
+    <div id="detailsBox" class="details-box">
+      <h2 id="roomTitle"></h2>
+      <p id="roomDesc"></p>
+    </div>
+  </div>
+
+  <script>
+    const roomInfo = {
+      "COM-101": "COM-101 is a computer lab with 30 PCs and high-speed internet.",
+      "COM-102": "COM-102 is a modern classroom with smart board and AC.",
+      "COM-103": "COM-103 is a hardware practice room with testing kits.",
+      "COM-301": "COM-301 is a seminar room with projector and sound system.",
+      "COM-302": "COM-302 is a software development lab for Python & Java.",
+      "COM-303": "COM-303 is a network lab with Cisco routers and switches.",
+      "COM-304": "COM-304 is used for group discussions and training.",
+      "COM-305": "COM-305 is a quiet study room for final year students.",
+      "COM-401": "COM-401 is used for final year project presentations.",
+      "COM-402": "COM-402 is a mobile app development lab.",
+      "COM-403": "COM-403 is for AI and machine learning workshops.",
+      "COM-404": "COM-404 is a resource room with e-library access.",
+      "COM-405": "COM-405 is used for embedded systems and IoT labs."
+    };
+
+    function showDetails(room) {
+      const title = document.getElementById('roomTitle');
+      const desc = document.getElementById('roomDesc');
+      const box = document.getElementById('detailsBox');
+
+      title.textContent = room;
+      desc.textContent = roomInfo[room] || "No details found for this classroom.";
+      box.style.display = "block";
+    }
+
+  </script>
+</body>
+</html>

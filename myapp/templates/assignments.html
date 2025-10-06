@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Dashboard - Assignments</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background-color: #eef2f7;
+    }
+    .header {
+      background: #2c3e50;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+    h1 {
+      margin: 0;
+    }
+    .assignment-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      list-style: none;
+    }
+    .assignment-list li {
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+    .assignment-list li:hover {
+      transform: translateY(-5px);
+    }
+    .assignment-list h3 {
+      margin: 0 0 10px;
+      font-size: 20px;
+      color: #34495e;
+    }
+    .due {
+      font-weight: bold;
+      color: #e74c3c;
+    }
+    .from-teacher {
+      font-size: 14px;
+      color: #555;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <a href="{% url 'student_dashboard' %}" style="color: white; text-decoration: none; position: absolute; left: 20px; top: 20px;">
+      <i class="fas fa-arrow-left"></i> Back
+    </a>
+    <h1><i class="fas fa-user-assignment"></i> Assignments</h1>
+  </div>
+
+  <ul class="assignment-list" id="assignmentList">
+    <!-- Assignments will be loaded here -->
+  </ul>
+
+  <script>
+    // Normally এই data আসবে backend থেকে (API/Database)
+    const assignments = [
+      {
+        title: "Assignment 1: Introduction to Programming",
+        due: "2024-05-10",
+        desc: "Complete the exercises on variables and data types.",
+        teacher: "Mr. Rahman"
+      },
+      {
+        title: "Assignment 2: Web Development Basics",
+        due: "2024-05-20",
+        desc: "Create a simple webpage using HTML and CSS.",
+        teacher: "Ms. Akter"
+      },
+      {
+        title: "Assignment 3: Database Management",
+        due: "2024-05-30",
+        desc: "Design a database schema for a library system.",
+        teacher: "Mr. Karim"
+      }
+    ];
+
+    const list = document.getElementById("assignmentList");
+    assignments.forEach(a => {
+      list.innerHTML += `
+        <li>
+          <h3><i class="fas fa-tasks"></i> ${a.title}</h3>
+          <p class="due">Due Date: ${a.due}</p>
+          <p>${a.desc}</p>
+          <p class="from-teacher"><i class="fas fa-chalkboard-teacher"></i> From: ${a.teacher}</p>
+        </li>
+      `;
+    });
+  </script>
+</body>
+</html>

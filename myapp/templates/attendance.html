@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<title>Teacher Attendance</title>
+<style>
+body { font-family: Arial; background: #f4f7f8; padding: 20px; margin:0; }
+h2 { text-align: center; color: #2c3e50; margin-bottom: 20px; }
+form { background: #fff; padding:20px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.1); margin-bottom:20px;}
+label { display:block; margin-top:10px; font-weight:bold; }
+input[type=text], input[type=date], select { width:100%; padding:8px; margin-top:5px; border-radius:5px; border:1px solid #ccc; font-size:14px; }
+button { background-color:#27ae60; color:#fff; padding:10px 20px; border:none; border-radius:7px; cursor:pointer; font-size:16px; margin-top:15px;}
+button:hover { background-color:#219150; }
+table { width:100%; border-collapse:collapse; margin-top:20px; }
+th, td { border:1px solid #ddd; padding:10px; text-align:center; }
+th { background:#ecf0f1; font-weight:bold; }
+tr:nth-child(even) { background:#f9f9f9; }
+.radio-group { display:flex; justify-content:center; gap:10px; }
+.radio-group input[type=radio] { margin-right:5px; }
+.notice { text-align:center; padding:10px; background:#ffdddd; color:#c0392b; border-radius:5px; margin-top:10px; }
+.success { text-align:center; padding:10px; background:#d4edda; color:#155724; border-radius:5px; margin-top:10px; }
+</style>
+</head>
+<body>
+
+<h2>Teacher Attendance</h2>
+
+{% if messages %}
+    {% for message in messages %}
+        <p class="success">{{ message }}</p>
+    {% endfor %}
+{% endif %}
+
+<!-- Filter Form -->
+<form method="get">
+<label>Semester</label>
+<select name="semester">
+ {% for i in semester_range %}
+  <option value=" {{ i }}" {% if semester_selected|stringformat:"s" == i|stringformat:"s" %}selected{% endif %}>{{ i }}</option>
+ {% endfor %}
+</select>
+
+<label>Shift</label>
+<select name="shift">
+  <option value="Morning" {% if shift_selected == "Morning" %}selected{% endif %}>Morning</option>
+  <option value="Day" {% if shift_selected == "Day" %}selected{% endif %}>Day</option>
+</select>
+
+<button type="submit">Load Students</button>
+</form>
+
+{% if students %}
+<form method="post">
+  {% csrf_token %}
+  <label>Subject</label><input type="text" name="subject" required>
+  <label>Date</label><input type="date" name="date" value="{{ today }}" required>
+  <label>Teacher Name</label><input type="text" name="teacher" required>
+
+  <table>
+    <tr><th>Roll</th><th>Name</th><th>Status</th></tr>
+    {% for student in students %}
+    <tr>
+      <td>{{ student.roll_number }}</td>
+      <td>{{ student.user.username }}</td>
+      <td>
+        <div class="radio-group">
+          <label><input type="radio" name="status[{{ student.roll_number }}]" value="Present" required> P</label>
+          <label><input type="radio" name="status[{{ student.roll_number }}]" value="Absent"> A</label>
+          <label><input type="radio" name="status[{{ student.roll_number }}]" value="Late"> L</label>
+        </div>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <button type="submit">Save Attendance</button>
+</form>
+{% else %}
+<p class="notice">No students found for selected semester and shift.</p>
+{% endif %}
+
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!-- myapp/templates/student.html -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Search Student</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #33add9ff;
+      padding: 40px;
+      color: #333;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      padding: 30px 40px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 30px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    select, input[type="text"] {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    select:focus, input:focus {
+      outline: none;
+      border-color: #2980b9;
+      box-shadow: 0 0 5px rgba(41, 128, 185, 0.4);
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #3498db;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #2980b9;
+    }
+
+    .student-details {
+      margin-top: 40px;
+      text-align: center;
+      background: #fefefe;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .student-details img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 15px;
+      border: 3px solid #3498db;
+    }
+
+    .student-details h3 {
+      margin: 10px 0 5px;
+      color: #2c3e50;
+    }
+
+    .student-details p {
+      margin: 3px 0;
+      font-size: 15px;
+      color: #555;
+    }
+
+    .no-result {
+      margin-top: 30px;
+      text-align: center;
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>🔍 Search Student</h2>
+
+  <!-- পুরাতন ফর্ম -->
+  <form method="GET" action="{% url 'search_student' %}">
+    <div class="form-group">
+      <label for="semester">Semester:</label>
+      <select name="semester" id="semester">
+        <option value="">-- Select Semester --</option>
+        <option value="1st" {% if request.GET.semester == "1st" %}selected{% endif %}>1st</option>
+        <option value="2nd" {% if request.GET.semester == "2nd" %}selected{% endif %}>2nd</option>
+        <option value="3rd" {% if request.GET.semester == "3rd" %}selected{% endif %}>3rd</option>
+        <option value="4th" {% if request.GET.semester == "4th" %}selected{% endif %}>4th</option>
+        <option value="5th" {% if request.GET.semester == "5th" %}selected{% endif %}>5th</option>
+        <option value="6th" {% if request.GET.semester == "6th" %}selected{% endif %}>6th</option>
+        <option value="7th" {% if request.GET.semester == "7th" %}selected{% endif %}>7th</option>
+        <option value="8th" {% if request.GET.semester == "8th" %}selected{% endif %}>8th</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="shift">Shift:</label>
+      <select name="shift" id="shift">
+        <option value="">-- Select Shift --</option>
+        <option value="Morning" {% if request.GET.shift == "Morning" %}selected{% endif %}>Morning</option>
+        <option value="Day" {% if request.GET.shift == "Day" %}selected{% endif %}>Day</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="roll">Roll Number:</label>
+      <input type="text" name="roll" id="roll" placeholder="Enter roll number" value="{{ request.GET.roll }}" />
+    </div>
+
+    <button type="submit">Search</button>
+  </form>
+
+  <!-- পুরাতন সার্চের রেজাল্ট (semester, shift, roll) -->
+  {% if searched %}
+    {% if student %}
+      <div class="student-details">
+        <h3>{{ student.name }}</h3>
+        <p><strong>Roll:</strong> {{ student.roll_number }}</p>
+        <p><strong>Semester:</strong> {{ student.semester }}</p>
+        <p><strong>Shift:</strong> {{ student.shift }}</p>
+        <p><strong>Subject:</strong> {{ student.subject }}</p>
+      </div>
+    {% else %}
+      <div class="no-result">No student found.</div>
+    {% endif %}
+  {% endif %}
+</div>
+
+</body>
+</html>
